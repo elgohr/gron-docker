@@ -1,2 +1,2 @@
 # gron-docker
-Make JSON greppable in Docker
+A simple alpine docker image for [gron](https://github.com/tomnomnom/gron)

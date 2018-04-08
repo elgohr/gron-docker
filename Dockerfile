@@ -1,0 +1,8 @@
+FROM golang as build
+ENV CGO_ENABLED 0
+RUN go get -u github.com/tomnomnom/gron \
+ && go build -o /gron github.com/tomnomnom/gron
+
+FROM alpine as run
+RUN apk add --no-cache ca-certificates
+COPY --from=build /gron /usr/local/bin/
