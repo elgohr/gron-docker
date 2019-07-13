@@ -1,9 +1,29 @@
-workflow "Build" {
+workflow "Publish" {
+  resolves = [
+    "logout",
+  ]
   on = "push"
-  resolves = ["GitHub Action for Docker"]
 }
 
-action "GitHub Action for Docker" {
-  uses = "actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699"
-  args = "build ."
+action "login" {
+  uses = "actions/docker/login@master"
+  secrets = [
+    "DOCKER_USERNAME",
+    "DOCKER_PASSWORD",
+  ]
+  env = {
+    DOCKER_REGISTRY_URL = "docker.pkg.github.com"
+  }
+}
+
+action "publish" {
+  uses = "elgohr/Publish-Docker-Github-Action@master"
+  args = "docker.pkg.github.com/elgohr/gron-docker/gron-docker"
+  needs = ["login"]
+}
+
+action "logout" {
+  uses = "actions/docker/cli@master"
+  args = "logout"
+  needs = ["publish"]
 }
