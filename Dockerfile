@@ -3,6 +3,6 @@ ENV CGO_ENABLED 0
 RUN go get -u github.com/tomnomnom/gron \
  && go build -o /gron github.com/tomnomnom/gron
 
-FROM alpine:3.10.3 as run
+FROM alpine:3.11.0 as run
 RUN apk add --no-cache ca-certificates
 COPY --from=build /gron /usr/local/bin/
