@@ -1,4 +1,4 @@
-FROM golang:1.16.5 as build
+FROM golang:1.16.7 as build
 ENV CGO_ENABLED 0
 RUN go get -u github.com/tomnomnom/gron \
  && mv "$(which gron)" /gron
