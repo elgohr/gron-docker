@@ -1,6 +1,6 @@
-FROM golang:1.17.7 as build
+FROM golang:1.18.1 as build
 ENV CGO_ENABLED 0
-RUN go get -u github.com/tomnomnom/gron \
+RUN go install github.com/tomnomnom/gron@latest \
  && mv "$(which gron)" /gron
 
 FROM alpine:3.15.4 as run
