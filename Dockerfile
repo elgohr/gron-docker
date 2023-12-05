@@ -1,4 +1,4 @@
-FROM golang:1.21.4 as build
+FROM golang:1.21.5 as build
 ENV CGO_ENABLED 0
 RUN go install github.com/tomnomnom/gron@latest \
  && mv "$(which gron)" /gron
