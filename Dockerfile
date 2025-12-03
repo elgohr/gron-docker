@@ -3,6 +3,6 @@ ENV CGO_ENABLED 0
 RUN go install github.com/tomnomnom/gron@latest \
  && mv "$(which gron)" /gron
 
-FROM alpine:3.22.2 as run
+FROM alpine:3.23.0 as run
 RUN apk add --no-cache ca-certificates
 COPY --from=build /gron /usr/local/bin/
